@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tezos_wallet">
    <application
-        android:label="tezos_wallet"
+        android:label="Wally XTZ"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
