@@ -22,9 +22,9 @@ Flutter app for Android/ios. Tested for Android with edo2net test network.
 
 # Screen Shots
 
-[Imgur](https://imgur.com/QtJubxf)
-[Imgur](https://imgur.com/9oPMbCF)
-[Imgur](https://imgur.com/1HrUR3k)
-[Imgur](https://imgur.com/ITRHCOS)
+[Imgur](https://i.imgur.com/QtJubxf.jpeg)
+[Imgur](https://i.imgur.com/9oPMbCF.jpeg)
+[Imgur](https://i.imgur.com/1HrUR3k.jpeg)
+[Imgur](https://i.imgur.com/ITRHCOS.jpeg)
 
 
