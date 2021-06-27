@@ -39,10 +39,13 @@ class _ImportAccountState extends State<ImportAccount> {
               padding: EdgeInsets.all(10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [Text('Import account'), Icon(Icons.download)],
+                children: [
+                  Text(widget.firstLogin ? 'Create account' : 'Import account'),
+                  Icon(Icons.download)
+                ],
               ),
             ),
-            if (widget.firstLogin) Text('Import a account to continue'),
+            if (widget.firstLogin) Text('Import/Create a account to continue'),
             SizedBox(
               height: 20,
             ),
@@ -51,7 +54,7 @@ class _ImportAccountState extends State<ImportAccount> {
               children: [
                 buttons('Private Key', 0),
                 buttons('Mnemonic', 1),
-                buttons('Fundraiser', 2)
+                buttons('Fundraiser', 2),
               ],
             ),
             if (selectedValue == 0)
@@ -94,9 +97,8 @@ class _ImportAccountState extends State<ImportAccount> {
                 color: selectedValue == val ? Colors.white : Colors.grey[700]),
           ),
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(selectedValue == val
-                ? Colors.deepPurpleAccent
-                : Colors.white),
+            backgroundColor: MaterialStateProperty.all(
+                selectedValue == val ? Colors.deepPurpleAccent : Colors.white),
           ),
         ));
   }

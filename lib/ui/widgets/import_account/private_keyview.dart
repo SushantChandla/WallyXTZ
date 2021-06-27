@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tezos_wallet/state_management/appstate.dart';
 import 'package:tezster_dart/tezster_dart.dart';
 
 class PrivateKey extends StatefulWidget {
@@ -57,6 +58,7 @@ class _PrivateKeyState extends State<PrivateKey> {
           SizedBox(height: 20),
           ElevatedButton(
               onPressed: () async {
+                AppState.instance.showProgress();
                 try {
                   List<String> keys = await TezsterDart.signOperationGroup(
                       privateKey: privateKey, forgedOperation: forgedOperation);
@@ -72,7 +74,7 @@ class _PrivateKeyState extends State<PrivateKey> {
                       SnackBar(content: Text('Something went Wrong')));
                   return;
                 }
-
+ AppState.instance.dismissprogress();
                 widget.afterImport();
               },style: ButtonStyle(
                             backgroundColor:

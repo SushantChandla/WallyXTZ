@@ -76,6 +76,7 @@ class _FundraiserViewState extends State<FundraiserView> {
           SizedBox(height: 20),
           ElevatedButton(
               onPressed: () async {
+                AppState.instance.showProgress();
                 try {
                   List<String> keys =
                       await TezsterDart.unlockFundraiserIdentity(
@@ -93,18 +94,15 @@ class _FundraiserViewState extends State<FundraiserView> {
                       SnackBar(content: Text('Something went Wrong')));
                   return;
                 }
-
+                AppState.instance.dismissprogress();
                 widget.afterImport();
               },
               style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.deepPurple),
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    side:
-                                        BorderSide(color: Colors.deepPurple)))),
+                  backgroundColor: MaterialStateProperty.all(Colors.deepPurple),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          side: BorderSide(color: Colors.deepPurple)))),
               child: Text('Import account'))
         ],
       ),

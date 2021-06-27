@@ -130,13 +130,14 @@ class AppState {
 
   Future<void> refreshAccounts() async {
     showProgress();
-    accounts = [];
+    List<Accounts> temp = [];
     for (var address in accountsAddress) {
       var response = await getAccountInfo(selectedNetwork, address);
-      accounts.add(accountFromJsonString(response.body,
+      temp.add(accountFromJsonString(response.body,
           pref.getString('$address-pr'), pref.getString('$address-se')));
-      _setOperations(accounts.last);
+      _setOperations(temp.last);
     }
+    accounts = temp;
     _updateSink.add(true);
     dismissprogress();
   }
