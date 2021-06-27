@@ -20,4 +20,11 @@ Flutter app for Android/ios. Tested for Android with edo2net test network.
 * tzkt API
 * tezster_dart
 
+# Screen Shots
+
+[Imgur](https://imgur.com/QtJubxf)
+[Imgur](https://imgur.com/9oPMbCF)
+[Imgur](https://imgur.com/1HrUR3k)
+[Imgur](https://imgur.com/ITRHCOS)
+
 
