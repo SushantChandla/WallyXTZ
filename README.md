@@ -1,16 +1,23 @@
-# tezos_wallet
+# Wally XYZ 
 
-A new Flutter project.
-
+A Tezos wallet made for Sending and managing you tezos account works on MainNet, Edo2Net test net, Florence Test net. Works for Multiple account with  **Flutter**, **tezster_dart**, **tzkt** fetching account information.The App has the design for all the possible operations.
 ## Getting Started
 
 This project is a starting point for a Flutter application.
+#### To run App.
+```bash
+git clone ...
+cd git_dir
+flutter pub get
+flutter run 
+```
+Flutter app for Android/ios. Tested for Android with edo2net test network.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Build With Tech.
+* Flutter
+* tzkt API
+* tezster_dart
+
+
