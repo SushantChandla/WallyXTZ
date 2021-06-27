@@ -11,7 +11,8 @@ class NonceRevelationOperation extends Operation {
   int bakerRewards;
   Baker sender;
   int revealedLevel;
-
+@override
+  String get getType =>  type;
   NonceRevelationOperation(
       {
       this.id,

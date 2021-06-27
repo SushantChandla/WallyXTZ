@@ -1,9 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tezos_wallet/Models/account.dart';
+import 'package:tezos_wallet/Models/accounts/contract.dart';
+import 'package:tezos_wallet/Models/accounts/delegate.dart';
+import 'package:tezos_wallet/Models/accounts/empty.dart';
+import 'package:tezos_wallet/Models/accounts/user.dart';
+import 'package:tezos_wallet/Models/operations.dart';
 import 'package:tezos_wallet/Networking/networking.dart';
 import 'package:tezos_wallet/ui/pages/import_account.dart';
+import 'package:tezster_dart/tezster_dart.dart';
 
 class AppState {
   AppState._();
@@ -29,16 +37,18 @@ class AppState {
                 firstLogin: true,
               )));
     } else {
-      for (var address in accountsAddress) {
-        var response = await getAccountInfo(selectedNetwork, address);
-        accounts.add(accountFromJsonString(response.body,
-            pref.getString('$address-pr'), pref.getString('$address-se')));
-      }
+      await refreshAccounts();
     }
     _updateSink.add(true);
   }
 
   void addAccount(List<String> keys) async {
+    for (var address in accountsAddress) {
+      if (address == keys[2]) {
+        //Scaffold Maybe
+        return;
+      }
+    }
     accountsAddress.add(keys[2]);
     pref.setStringList('accountsAddress', accountsAddress);
     pref.setString('${keys[2]}-se', keys[0]);
@@ -51,15 +61,141 @@ class AppState {
   void changeSelectedNetwork(String network) async {
     selectedNetwork = network;
     pref.setString('selectedNetwork', selectedNetwork);
-    for (var address in accountsAddress) {
-      var response = await getAccountInfo(selectedNetwork, address);
-      accounts.add(accountFromJsonString(response.body,
-          pref.getString('$address-pr'), pref.getString('$address-se')));
-    }
+    refreshAccounts();
     _updateSink.add(true);
   }
 
   final BehaviorSubject<bool> _appStream = BehaviorSubject();
   Stream<bool> get updatesStream => _appStream.stream;
   Sink get _updateSink => _appStream.sink;
+
+  String getAccountAddressCurrent() {
+    Accounts account;
+    if (AppState.instance.accounts.isNotEmpty) {
+      account = AppState.instance.accounts[AppState.instance.selectedAccount];
+    }
+    if (account != null && account.getType == UserAccount.type) {
+      return (account as UserAccount).address;
+    } else if (account != null && account.getType == ContractAccount.type) {
+      return (account as ContractAccount).address;
+    } else if (account != null && account.getType == DelegateAccount.type) {
+      return (account as DelegateAccount).address;
+    } else if (account != null && account.getType == EmptyAccount.type) {
+      return (account as EmptyAccount).address;
+    }
+    return 'Something Went Wrong!';
+  }
+
+  String getBalanceAccountCurrent() {
+    Accounts account;
+    if (AppState.instance.accounts.isNotEmpty) {
+      account = AppState.instance.accounts[AppState.instance.selectedAccount];
+    }
+    if (account != null && account.getType == UserAccount.type) {
+      return ((account as UserAccount).balance / 1000000).toString();
+    } else if (account != null && account.getType == ContractAccount.type) {
+      return ((account as ContractAccount).balance / 1000000).toString();
+    } else if (account != null && account.getType == DelegateAccount.type) {
+      return ((account as DelegateAccount).balance / 1000000).toString();
+    } else if (account != null && account.getType == EmptyAccount.type) {
+      return ((account as EmptyAccount).balance / 1000000).toString();
+    }
+    return 'Something Went Wrong!';
+  }
+
+  void makeTransaction(String account, double ammount) async {
+    List<String> keys = getSelectedAccountkeys();
+    var keyStore = KeyStoreModel(
+      publicKey: keys[1],
+      secretKey: keys[0],
+      publicKeyHash: keys[2],
+    );
+
+    var signer = await TezsterDart.createSigner(
+        TezsterDart.writeKeyWithHint(keyStore.secretKey, 'edsk'));
+
+    var result = await TezsterDart.sendTransactionOperation(
+      networksChains[selectedNetwork],
+      signer,
+      keyStore,
+      account,
+      (ammount * 1000000).toInt(),
+      10000,
+    );
+  }
+
+  Future<void> refreshAccounts() async {
+    accounts = [];
+    for (var address in accountsAddress) {
+      var response = await getAccountInfo(selectedNetwork, address);
+      accounts.add(accountFromJsonString(response.body,
+          pref.getString('$address-pr'), pref.getString('$address-se')));
+      _setOperations(accounts.last);
+    }
+    _updateSink.add(true);
+  }
+
+  void _setOperations(Accounts _account) async {
+    if (_account != null && _account.getType == UserAccount.type) {
+      UserAccount t = _account;
+      var response = await getAccountOperations(selectedNetwork, t.address);
+      var data = jsonDecode(response.body);
+      t.operations =
+          (data as List).map((e) => operationFromJsonString(e)).toList();
+    } else if (_account != null && _account.getType == ContractAccount.type) {
+      ContractAccount t = _account;
+      var response = await getAccountOperations(selectedNetwork, t.address);
+      var data = jsonDecode(response.body);
+      t.operations =
+          (data as List).map((e) => operationFromJsonString(e)).toList();
+    } else if (_account != null && _account.getType == DelegateAccount.type) {
+      DelegateAccount t = _account;
+      var response = await getAccountOperations(selectedNetwork, t.address);
+      var data = jsonDecode(response.body);
+      t.operations =
+          (data as List).map((e) => operationFromJsonString(e)).toList();
+    }
+  }
+
+  List<String> getSelectedAccountkeys() {
+    Accounts _account;
+    if (AppState.instance.accounts.isNotEmpty) {
+      _account = AppState.instance.accounts[AppState.instance.selectedAccount];
+    }
+    if (_account != null && _account.getType == UserAccount.type) {
+      UserAccount t = _account;
+      return [t.secret, t.privateKey, t.address];
+    } else if (_account != null && _account.getType == ContractAccount.type) {
+      ContractAccount t = _account;
+      return [t.secret, t.privateKey, t.address];
+    } else if (_account != null && _account.getType == DelegateAccount.type) {
+      DelegateAccount t = _account;
+      return [t.secret, t.privateKey, t.address];
+    } else if (_account != null && _account.getType == EmptyAccount.type) {
+      EmptyAccount t = _account;
+      return [t.secret, t.privateKey, t.address];
+    }
+    return [];
+  }
+
+  List<Operation> getSelectedAccountOperations() {
+    Accounts _account;
+    if (AppState.instance.accounts.isNotEmpty) {
+      _account = AppState.instance.accounts[AppState.instance.selectedAccount];
+    }
+    if (_account != null && _account.getType == UserAccount.type) {
+      UserAccount t = _account;
+      return t.operations;
+    } else if (_account != null && _account.getType == ContractAccount.type) {
+      ContractAccount t = _account;
+      return t.operations;
+    } else if (_account != null && _account.getType == DelegateAccount.type) {
+      DelegateAccount t = _account;
+      return t.operations;
+    } else if (_account != null && _account.getType == EmptyAccount.type) {
+      EmptyAccount t = _account;
+      return [];
+    }
+    return [];
+  }
 }

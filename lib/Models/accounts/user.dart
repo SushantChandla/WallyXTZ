@@ -29,7 +29,7 @@ class UserAccount extends Accounts {
   int lastActivity;
   String lastActivityTime;
   List<Contracts> contracts;
-  List<Operation> operations;
+  List<Operation> operations=[];
   Metadata metadata;
 
   UserAccount(
@@ -86,12 +86,6 @@ class UserAccount extends Accounts {
       contracts = new List<Contracts>();
       json['contracts'].forEach((v) {
         contracts.add(new Contracts.fromJson(v));
-      });
-    }
-    if (json['operations'] != null) {
-      operations = [];
-      json['operations'].forEach((v) {
-        operations.add(operationFromJsonString(v));
       });
     }
     metadata = json['metadata'] != null

@@ -1,7 +1,7 @@
 import 'package:tezos_wallet/Models/operations.dart';
 
 class OriginationOperation extends Operation {
-  static String type='origination';
+  static String type = 'origination';
   int id;
   int level;
   String timestamp;
@@ -21,10 +21,10 @@ class OriginationOperation extends Operation {
   Sender contractDelegate;
   String status;
   OriginatedContract originatedContract;
-
+  @override
+  String get getType => type;
   OriginationOperation(
-      {
-      this.id,
+      {this.id,
       this.level,
       this.timestamp,
       this.block,

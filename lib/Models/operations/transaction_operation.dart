@@ -1,7 +1,7 @@
 import 'package:tezos_wallet/Models/operations.dart';
 
 class TransactionOperation extends Operation {
-  static String type='transaction';
+  static String type = 'transaction';
   int id;
   int level;
   String timestamp;
@@ -22,10 +22,10 @@ class TransactionOperation extends Operation {
   String status;
   bool hasInternals;
   String parameters;
-
+  @override
+  String get getType => type;
   TransactionOperation(
-      {
-      this.id,
+      {this.id,
       this.level,
       this.timestamp,
       this.block,

@@ -74,7 +74,15 @@ class _PrivateKeyState extends State<PrivateKey> {
                 }
 
                 widget.afterImport();
-              },
+              },style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.deepPurple),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    side:
+                                        BorderSide(color: Colors.deepPurple)))),
               child: Text('Import account'))
         ],
       ),

@@ -1,7 +1,7 @@
 import 'package:tezos_wallet/Models/operations.dart';
 
 class DelegationOperation extends Operation {
-  static String type='delegation';
+  static String type = 'delegation';
   int id;
   int level;
   String timestamp;
@@ -15,10 +15,11 @@ class DelegationOperation extends Operation {
   int amount;
   Sender newDelegate;
   String status;
+  @override
+  String get getType => type;
 
   DelegationOperation(
-      {
-      this.id,
+      {this.id,
       this.level,
       this.timestamp,
       this.block,

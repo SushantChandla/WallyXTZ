@@ -12,7 +12,8 @@ class ProposalOperation extends Operation {
   Delegate delegate;
   int rolls;
   bool duplicated;
-
+  @override
+  String get getType => type;
   ProposalOperation(
       {this.id,
       this.level,

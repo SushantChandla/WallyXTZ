@@ -3,7 +3,6 @@ import 'package:tezos_wallet/ui/pages/landing.dart';
 import 'package:tezos_wallet/ui/widgets/import_account/fundraiser_view.dart';
 import 'package:tezos_wallet/ui/widgets/import_account/mnemonic_view.dart';
 import 'package:tezos_wallet/ui/widgets/import_account/private_keyview.dart';
-import 'package:tezos_wallet/ui/widgets/topbar.dart';
 
 class ImportAccount extends StatefulWidget {
   const ImportAccount({Key key, this.firstLogin = false}) : super(key: key);
@@ -17,15 +16,27 @@ class _ImportAccountState extends State<ImportAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurpleAccent,
+        centerTitle: true,
+        title: Text(
+          'Wally XTZ',
+        ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TopBar(),
             Container(
-              color: Colors.grey[100],
-              padding: EdgeInsets.all(
-                10,
-              ),
+              color: Colors.deepPurple[200],
+              padding: EdgeInsets.all(10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [Text('Import account'), Icon(Icons.download)],
@@ -36,7 +47,7 @@ class _ImportAccountState extends State<ImportAccount> {
               height: 20,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 buttons('Private Key', 0),
                 buttons('Mnemonic', 1),
@@ -72,15 +83,21 @@ class _ImportAccountState extends State<ImportAccount> {
 
   Widget buttons(String text, int val) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: TextButton(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        child: ElevatedButton(
           onPressed: () => setState(() {
-                selectedValue = val;
-              }),
+            selectedValue = val;
+          }),
           child: Text(
             text,
-            style: TextStyle(color: Colors.grey[600]),
-          )),
-    );
+            style: TextStyle(
+                color: selectedValue == val ? Colors.white : Colors.grey[700]),
+          ),
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(selectedValue == val
+                ? Colors.deepPurpleAccent
+                : Colors.white),
+          ),
+        ));
   }
 }

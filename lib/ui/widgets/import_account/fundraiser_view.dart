@@ -43,6 +43,7 @@ class _FundraiserViewState extends State<FundraiserView> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: TextFormField(
+              obscureText: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(
@@ -87,7 +88,6 @@ class _FundraiserViewState extends State<FundraiserView> {
                     return;
                   }
                   AppState.instance.addAccount(keys);
-
                 } catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Something went Wrong')));
@@ -96,6 +96,15 @@ class _FundraiserViewState extends State<FundraiserView> {
 
                 widget.afterImport();
               },
+              style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.deepPurple),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    side:
+                                        BorderSide(color: Colors.deepPurple)))),
               child: Text('Import account'))
         ],
       ),

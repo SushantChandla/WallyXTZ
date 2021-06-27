@@ -12,62 +12,57 @@ import 'package:tezos_wallet/Models/operations/proposal.dart';
 import 'package:tezos_wallet/Models/operations/reveal_operation.dart';
 import 'package:tezos_wallet/Models/operations/transaction_operation.dart';
 
-abstract class Operation{
-  Map<String,dynamic> toJson();
+abstract class Operation {
+  Map<String, dynamic> toJson();
+  String get getType;
 }
 
-Operation operationFromJsonString(Map<String,dynamic> json){
-  if(json['type']==ActivationOperation.type){
+Operation operationFromJsonString(Map<String, dynamic> json) {
+  if (json['type'] == ActivationOperation.type) {
     return ActivationOperation.fromJson(json);
   }
 
-  if(json['type']==BakingOperation.type){
+  if (json['type'] == BakingOperation.type) {
     return BakingOperation.fromJson(json);
   }
 
-  if(json['type']==BallotOperation.type){
+  if (json['type'] == BallotOperation.type) {
     return BallotOperation.fromJson(json);
   }
 
-  if(json['type']==DelegationOperation.type){
+  if (json['type'] == DelegationOperation.type) {
     return DelegationOperation.fromJson(json);
   }
 
-
-
-  if(json['type']==DoubleBakingOperation.type){
+  if (json['type'] == DoubleBakingOperation.type) {
     return DoubleBakingOperation.fromJson(json);
   }
 
-
-  if(json['type']==EndorsementOperation.type){
+  if (json['type'] == EndorsementOperation.type) {
     return EndorsementOperation.fromJson(json);
   }
 
-
-  if(json['type']==NonceRevelationOperation.type){
+  if (json['type'] == NonceRevelationOperation.type) {
     return NonceRevelationOperation.fromJson(json);
   }
 
-
-  if(json['type']==OriginationOperation.type){
+  if (json['type'] == OriginationOperation.type) {
     return OriginationOperation.fromJson(json);
   }
 
-
-  if(json['type']==ProposalOperation.type){
+  if (json['type'] == ProposalOperation.type) {
     return ProposalOperation.fromJson(json);
   }
 
-  if(json['type']==RevealOperation.type){
+  if (json['type'] == RevealOperation.type) {
     return RevealOperation.fromJson(json);
   }
 
-  if(json['type']==RevealOperation.type){
+  if (json['type'] == RevealOperation.type) {
     return RevealOperation.fromJson(json);
   }
 
-  if(json['type']==TransactionOperation.type){
+  if (json['type'] == TransactionOperation.type) {
     return TransactionOperation.fromJson(json);
   }
 

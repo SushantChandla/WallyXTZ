@@ -1,7 +1,7 @@
 import 'package:tezos_wallet/Models/operations.dart';
 
 class DoubleBakingOperation extends Operation {
-  static String type='double_baking';
+  static String type = 'double_baking';
   int id;
   int level;
   String timestamp;
@@ -14,10 +14,10 @@ class DoubleBakingOperation extends Operation {
   int offenderLostDeposits;
   int offenderLostRewards;
   int offenderLostFees;
-
+  @override
+  String get getType => type;
   DoubleBakingOperation(
-      {
-      this.id,
+      {this.id,
       this.level,
       this.timestamp,
       this.block,

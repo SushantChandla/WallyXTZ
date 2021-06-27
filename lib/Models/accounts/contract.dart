@@ -30,7 +30,7 @@ class ContractAccount extends Accounts {
   int typeHash;
   int codeHash;
   List<Contracts> contracts;
-  List<Operation> operations;
+  List<Operation> operations=[];
   Metadata metadata;
 
   ContractAccount(
@@ -94,12 +94,6 @@ class ContractAccount extends Accounts {
       contracts = new List<Contracts>();
       json['contracts'].forEach((v) {
         contracts.add(new Contracts.fromJson(v));
-      });
-    }
-    if (json['operations'] != null) {
-      operations = [];
-      json['operations'].forEach((v) {
-        operations.add(operationFromJsonString(v));
       });
     }
     metadata = json['metadata'] != null

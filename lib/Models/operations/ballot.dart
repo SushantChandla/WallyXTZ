@@ -1,7 +1,7 @@
 import 'package:tezos_wallet/Models/operations.dart';
 
-class BallotOperation extends Operation{
-  static String type='ballot';
+class BallotOperation extends Operation {
+  static String type = 'ballot';
   int id;
   int level;
   String timestamp;
@@ -12,10 +12,10 @@ class BallotOperation extends Operation{
   Delegate delegate;
   int rolls;
   String vote;
-
+  @override
+  String get getType => type;
   BallotOperation(
-      {
-      this.id,
+      {this.id,
       this.level,
       this.timestamp,
       this.block,

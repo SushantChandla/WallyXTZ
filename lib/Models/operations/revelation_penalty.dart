@@ -1,7 +1,7 @@
 import 'package:tezos_wallet/Models/operations.dart';
 
 class RevelationPenaltyOperation extends Operation {
-  static String type='revelation_penalty';
+  static String type = 'revelation_penalty';
   int id;
   int level;
   String timestamp;
@@ -10,10 +10,10 @@ class RevelationPenaltyOperation extends Operation {
   int missedLevel;
   int lostReward;
   int lostFees;
-
+  @override
+  String get getType => type;
   RevelationPenaltyOperation(
-      {
-      this.id,
+      {this.id,
       this.level,
       this.timestamp,
       this.block,

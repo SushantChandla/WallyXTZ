@@ -1,7 +1,7 @@
 import 'package:tezos_wallet/Models/operations.dart';
 
-class ActivationOperation  extends Operation{
-  static String type='activation';
+class ActivationOperation extends Operation {
+  static String type = 'activation';
   int id;
   int level;
   String timestamp;
@@ -11,8 +11,7 @@ class ActivationOperation  extends Operation{
   int balance;
 
   ActivationOperation(
-      {
-      this.id,
+      {this.id,
       this.level,
       this.timestamp,
       this.block,
@@ -45,6 +44,9 @@ class ActivationOperation  extends Operation{
     data['balance'] = this.balance;
     return data;
   }
+
+  @override
+  String get getType => type;
 }
 
 class Account {

@@ -43,7 +43,7 @@ class DelegateAccount extends Accounts {
   String lastActivityTime;
   List<Contracts> contracts;
   List<Delegators> delegators;
-  List<Operation> operations;
+  List<Operation> operations=[];
   Metadata metadata;
   Software software;
 
@@ -137,12 +137,6 @@ class DelegateAccount extends Accounts {
       delegators = new List<Delegators>();
       json['delegators'].forEach((v) {
         delegators.add(new Delegators.fromJson(v));
-      });
-    }
-    if (json['operations'] != null) {
-      operations = [];
-      json['operations'].forEach((v) {
-        operations.add(operationFromJsonString(v));
       });
     }
     metadata = json['metadata'] != null

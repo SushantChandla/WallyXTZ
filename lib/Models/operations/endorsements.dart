@@ -11,7 +11,8 @@ class EndorsementOperation extends Operation {
   int slots;
   int deposit;
   int rewards;
-
+@override
+  String get getType =>  type;
   EndorsementOperation(
       {
       this.id,

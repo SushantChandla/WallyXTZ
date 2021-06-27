@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
     return StreamBuilder<bool>(
         stream: AppState.instance.updatesStream,
         builder: (context, snapshot) {
-          print('refreshed');
           return MaterialApp(
             navigatorKey: AppState.naviagtorKey,
             title: 'Wally XTZ',

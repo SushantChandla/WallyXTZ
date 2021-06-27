@@ -46,6 +46,7 @@ class _MnemonicViewState extends State<MnemonicView> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             child: TextFormField(
+              obscureText: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(
@@ -76,7 +77,15 @@ class _MnemonicViewState extends State<MnemonicView> {
                 }
 
                 widget.afterImport();
-              },
+              },style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.deepPurple),
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    side:
+                                        BorderSide(color: Colors.deepPurple)))),
               child: Text('Import account'))
         ],
       ),
