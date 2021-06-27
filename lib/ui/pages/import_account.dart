@@ -22,14 +22,16 @@ class _ImportAccountState extends State<ImportAccount> {
         title: Text(
           'Wally XTZ',
         ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back_ios,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+        leading: widget.firstLogin
+            ? null
+            : IconButton(
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
       ),
       body: SingleChildScrollView(
         child: Column(
