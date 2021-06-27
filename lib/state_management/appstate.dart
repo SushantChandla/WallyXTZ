@@ -104,6 +104,8 @@ class AppState {
   }
 
   void makeTransaction(String account, double ammount) async {
+    showProgress();
+
     List<String> keys = getSelectedAccountkeys();
     var keyStore = KeyStoreModel(
       publicKey: keys[1],
@@ -122,9 +124,12 @@ class AppState {
       (ammount * 1000000).toInt(),
       10000,
     );
+
+    dismissprogress();
   }
 
   Future<void> refreshAccounts() async {
+    showProgress();
     accounts = [];
     for (var address in accountsAddress) {
       var response = await getAccountInfo(selectedNetwork, address);
@@ -133,6 +138,7 @@ class AppState {
       _setOperations(accounts.last);
     }
     _updateSink.add(true);
+    dismissprogress();
   }
 
   void _setOperations(Accounts _account) async {
@@ -155,6 +161,7 @@ class AppState {
       t.operations =
           (data as List).map((e) => operationFromJsonString(e)).toList();
     }
+    _updateSink.add(true);
   }
 
   List<String> getSelectedAccountkeys() {
@@ -197,5 +204,33 @@ class AppState {
       return [];
     }
     return [];
+  }
+
+  void _showErrorDialog(String event) {
+    final context = naviagtorKey.currentState?.context;
+    final dialog = AlertDialog(
+      content: Text('$event'),
+    );
+    showDialog(context: context, builder: (x) => dialog);
+  }
+
+  void showProgress() {
+    final context = naviagtorKey.currentContext;
+    final dialog = Center(
+        child: Container(
+            child: CircularProgressIndicator(),
+            height: 100,
+            width: 100,
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            )));
+    showDialog(
+        context: context, builder: (x) => dialog, barrierDismissible: false);
+  }
+
+  void dismissprogress() {
+    naviagtorKey.currentState.pop();
   }
 }

@@ -164,7 +164,8 @@ class _SendTransactionPageState extends State<SendTransactionPage> {
                       ),
                     ),
                   ),
-                  Text('Using the default gass free as  10000',style:TextStyle(color: Colors.grey)),
+                  Text('Using the default gas fee as 10000 mutez',
+                      style: TextStyle(color: Colors.grey)),
                   SizedBox(
                     height: 40,
                   ),

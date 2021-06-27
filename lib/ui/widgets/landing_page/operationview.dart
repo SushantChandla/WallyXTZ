@@ -31,18 +31,18 @@ class OperationsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(AppState.instance.getSelectedAccountOperations().length);
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          for (var operation
-              in AppState.instance.getSelectedAccountOperations())
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: getView(operation),
-            )
-        ],
-      ),
+    if( AppState.instance.getSelectedAccountOperations().isEmpty){
+      return Center(child:Text('NO Operations found on this account'));
+    }
+    return Column(
+      children: [
+        for (var operation
+            in AppState.instance.getSelectedAccountOperations())
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: getView(operation),
+          )
+      ],
     );
   }
 

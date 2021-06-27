@@ -4,7 +4,6 @@ import 'package:tezos_wallet/state_management/appstate.dart';
 import 'package:tezos_wallet/ui/pages/import_account.dart';
 import 'package:tezos_wallet/ui/pages/receive_page.dart';
 import 'package:tezos_wallet/ui/pages/send_transation.dart';
-import 'package:tezos_wallet/ui/widgets/landing_page/assetsview.dart';
 import 'package:tezos_wallet/ui/widgets/landing_page/operationview.dart';
 import 'package:tezos_wallet/ui/widgets/landing_page/transaction_buttons.dart';
 import 'package:tezos_wallet/ui/widgets/topbar.dart';
@@ -44,166 +43,147 @@ class _LandingPageState extends State<LandingPage> {
                   ))
             ],
           ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                color: Colors.deepPurple[200],
-                padding: EdgeInsets.all(10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(Icons.explore_outlined),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text('Explore'),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 8,
-              ),
-              TopBar(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Address',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  color: Colors.deepPurple[200],
+                  padding: EdgeInsets.all(10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.explore_outlined),
+                      SizedBox(
+                        width: 10,
                       ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Clipboard.setData(ClipboardData(
-                            text: AppState.instance
-                                .getAccountAddressCurrent()));
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('Copied To clipboard')));
-                      },
-                      child: Container(
+                      Text('Explore'),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                TopBar(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Address',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          Clipboard.setData(ClipboardData(
+                              text: AppState.instance
+                                  .getAccountAddressCurrent()));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Copied To clipboard')));
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                            vertical: 10,
+                          ),
+                          padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              border:
+                                  Border.all(color: Colors.deepPurple[300])),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              AppState.instance.getAccountAddressCurrent(),
+                              style: TextStyle(fontSize: 15),
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        'Balance',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Container(
                         margin: const EdgeInsets.symmetric(
                           vertical: 10,
                         ),
                         padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
                         decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10)),
-                            border:
-                                Border.all(color: Colors.deepPurple[300])),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            border: Border.all(color: Colors.deepPurple[300])),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            AppState.instance.getAccountAddressCurrent(),
-                            style: TextStyle(fontSize: 15),
+                          child: Row(
+                            children: [
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Image.asset(
+                                'assets/tez.png',
+                                height: 24,
+                                width: 24,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                '${AppState.instance.getBalanceAccountCurrent()} Tez',
+                                style: TextStyle(fontSize: 18),
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Balance',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                      SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 10,
-                      ),
-                      padding: const EdgeInsets.fromLTRB(10, 10, 0, 10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          border: Border.all(color: Colors.deepPurple[300])),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Image.asset(
-                              'assets/tez.png',
-                              height: 24,
-                              width: 24,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              '${AppState.instance.getBalanceAccountCurrent()} Tez',
-                              style: TextStyle(fontSize: 18),
+                            TransactionButton(
+                                icon: Icons.arrow_upward,
+                                text: 'Send',
+                                onClick: _handleSend),
+                            TransactionButton(
+                              icon: Icons.qr_code,
+                              text: 'Receive',
+                              onClick: _handleReceive,
                             ),
                           ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          TransactionButton(
-                              icon: Icons.arrow_upward,
-                              text: 'Send',
-                              onClick: _handleSend),
-                          TransactionButton(
-                            icon: Icons.qr_code,
-                            text: 'Receive',
-                            onClick: _handleReceive,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 20),
-              SizedBox(
-                height: 50,
-                child: AppBar(
-                  backgroundColor: Colors.white,
-                  elevation: 0,
-                  bottom: TabBar(
-                    labelColor: Colors.deepPurple,
-                    unselectedLabelColor: Colors.grey,
-                    indicatorColor: Colors.deepPurple,
-                    physics: const AlwaysScrollableScrollPhysics(),
-                    tabs: [
-                      Tab(
-                        child: Text(
-                          'Asset',
-                        ),
-                      ),
-                      Tab(
-                        child: Text(
-                          'Activity',
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-              Expanded(
-                child: TabBarView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  children: [
-                    AssetsView(),
-                    OperationsView(),
-                  ],
+                SizedBox(height: 20),
+                Center(
+                    child: Text(
+                  'Operations',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                )),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+                  child: Divider(
+                    color: Colors.deepPurpleAccent[200],
+                  ),
                 ),
-              ),
-            ],
+                OperationsView(),
+              ],
+            ),
           )),
     );
   }
