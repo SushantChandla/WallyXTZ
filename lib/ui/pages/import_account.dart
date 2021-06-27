@@ -79,7 +79,7 @@ class _ImportAccountState extends State<ImportAccount> {
 
   void afterImport() {
     if (widget.firstLogin) {
-      Navigator.push(
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => LandingPage()));
     } else {
       Navigator.pop(context);
