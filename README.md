@@ -1,6 +1,6 @@
 # Wally XYZ 
 
-A Tezos wallet made for Sending xtz and managing you tezos account works on MainNet, Edo2Net test net, Florence Test net. Works for Multiple account with  **Flutter**, **tezster_dart**, **tzkt** fetching account information.The App has the design for all the possible operations.
+A Tezos wallet made for managing you tezos account works on MainNet, Edo2Net test net, Florence Test net. Works for Multiple account with  **Flutter**, **tezster_dart**, **tzkt** fetching account information.The App has the design for all the possible operations.
 ## Getting Started
 
 This project is a starting point for a Flutter application.
