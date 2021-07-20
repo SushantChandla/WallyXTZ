@@ -11,10 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   cupertino_icons: ^1.0.2
-  tezster_dart: 
-    git: https://github.com/SushantChandla/Tezster_dart.git
+  tezster_dart_web: 
+    git: https://github.com/SushantChandla/tezster_dart_web.git
   rxdart: ^0.27.1
   http: ^0.13.3
   shared_preferences: ^2.0.6
@@ -23,6 +22,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  peanut: any
 
   flutter_lints: ^1.0.0
   flutter_launcher_icons: 

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tezos_wallet/state_management/appstate.dart';
 import 'package:tezos_wallet/ui/pages/landing.dart';
-import 'package:tezster_dart/tezster_dart.dart';
 
 void main() {
-  TezsterDart.init();
   runApp(const MyApp());
 }
 

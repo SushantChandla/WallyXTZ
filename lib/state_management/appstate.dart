@@ -11,7 +11,7 @@ import 'package:tezos_wallet/Models/accounts/user.dart';
 import 'package:tezos_wallet/Models/operations.dart';
 import 'package:tezos_wallet/Networking/networking.dart';
 import 'package:tezos_wallet/ui/pages/import_account.dart';
-import 'package:tezster_dart/tezster_dart.dart';
+import 'package:tezster_dart_web/tezster_dart.dart';
 
 class AppState {
   AppState._();

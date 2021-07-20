@@ -14,7 +14,7 @@
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="$FLUTTER_BASE_HREF">
+  <base href="/wallyxtz/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -25,7 +25,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="apple-mobile-web-app-title" content="tezos_wallet">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
+  <link rel="stylesheet" href="index.css">  
+  <script src="sodium.js"></script>
   <title>tezos_wallet</title>
   <link rel="manifest" href="manifest.json">
 </head>
@@ -33,6 +34,18 @@
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
+
+
+       <div class="wrap">
+        <div class="loading">
+          <div class="bounceball"></div>
+          <div class="text">NOW LOADING</div>
+        </div>
+      </div>
+      
+      
+
+
   <script>
     var serviceWorkerVersion = null;
     var scriptLoaded = false;

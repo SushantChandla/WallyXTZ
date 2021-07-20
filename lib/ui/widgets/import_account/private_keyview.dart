@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tezos_wallet/state_management/appstate.dart';
-import 'package:tezster_dart/tezster_dart.dart';
+import 'package:tezster_dart_web/tezster_dart.dart';
 
 class PrivateKey extends StatefulWidget {
   const PrivateKey({Key key, this.afterImport}) : super(key: key);

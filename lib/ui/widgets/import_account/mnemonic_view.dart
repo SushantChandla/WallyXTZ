@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tezos_wallet/state_management/appstate.dart';
-import 'package:tezster_dart/tezster_dart.dart';
+import 'package:tezster_dart_web/tezster_dart.dart';
 
 class MnemonicView extends StatefulWidget {
   const MnemonicView({Key key, this.afterImport}) : super(key: key);
@@ -97,6 +97,7 @@ class _MnemonicViewState extends State<MnemonicView> {
                   }
                   AppState.instance.addAccount(keys);
                 } catch (e) {
+                  print(e);
                   ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text('Something went Wrong')));
                   return;
